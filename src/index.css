@@ -1,0 +1,277 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep space background with purple undertone */
+    --background: 260 30% 5%;
+    --foreground: 60 10% 95%;
+
+    /* Rich card surfaces */
+    --card: 260 25% 8%;
+    --card-foreground: 60 10% 95%;
+
+    --popover: 260 25% 10%;
+    --popover-foreground: 60 10% 95%;
+
+    /* Electric violet primary */
+    --primary: 270 100% 65%;
+    --primary-foreground: 260 30% 5%;
+
+    /* Deep indigo secondary */
+    --secondary: 250 40% 15%;
+    --secondary-foreground: 60 10% 95%;
+
+    /* Muted cosmic tones */
+    --muted: 260 20% 18%;
+    --muted-foreground: 250 15% 60%;
+
+    /* Warm amber accent for contrast */
+    --accent: 35 100% 55%;
+    --accent-foreground: 260 30% 5%;
+
+    --destructive: 0 85% 55%;
+    --destructive-foreground: 60 10% 95%;
+
+    /* Subtle glowing borders */
+    --border: 260 30% 20%;
+    --input: 260 25% 15%;
+    --ring: 270 100% 65%;
+
+    --radius: 0.875rem;
+
+    /* Custom cosmic tokens */
+    --gradient-primary: linear-gradient(135deg, hsl(270 100% 65%) 0%, hsl(200 100% 60%) 50%, hsl(35 100% 55%) 100%);
+    --gradient-secondary: linear-gradient(135deg, hsl(270 100% 65%) 0%, hsl(320 80% 55%) 100%);
+    --gradient-card: linear-gradient(180deg, hsl(260 25% 12%) 0%, hsl(260 25% 8%) 100%);
+    --gradient-hero: radial-gradient(ellipse at top, hsl(260 30% 12%) 0%, hsl(260 30% 5%) 70%);
+    --gradient-glow: radial-gradient(circle, hsl(270 100% 65% / 0.15) 0%, transparent 70%);
+    
+    /* Glow effects */
+    --glow-primary: 0 0 60px hsl(270 100% 65% / 0.4), 0 0 120px hsl(270 100% 65% / 0.2);
+    --glow-accent: 0 0 40px hsl(35 100% 55% / 0.3);
+    --glow-subtle: 0 4px 30px hsl(270 100% 65% / 0.15);
+    
+    /* Orbit brand colors */
+    --orbit-violet: 270 100% 65%;
+    --orbit-cyan: 200 100% 60%;
+    --orbit-amber: 35 100% 55%;
+    --orbit-pink: 320 80% 55%;
+    --orbit-green: 160 70% 50%;
+    
+    /* Sidebar */
+    --sidebar-background: 260 30% 5%;
+    --sidebar-foreground: 60 10% 95%;
+    --sidebar-primary: 270 100% 65%;
+    --sidebar-primary-foreground: 260 30% 5%;
+    --sidebar-accent: 260 25% 12%;
+    --sidebar-accent-foreground: 60 10% 95%;
+    --sidebar-border: 260 30% 20%;
+    --sidebar-ring: 270 100% 65%;
+  }
+
+  .dark {
+    --background: 260 30% 5%;
+    --foreground: 60 10% 95%;
+    --card: 260 25% 8%;
+    --card-foreground: 60 10% 95%;
+    --popover: 260 25% 10%;
+    --popover-foreground: 60 10% 95%;
+    --primary: 270 100% 65%;
+    --primary-foreground: 260 30% 5%;
+    --secondary: 250 40% 15%;
+    --secondary-foreground: 60 10% 95%;
+    --muted: 260 20% 18%;
+    --muted-foreground: 250 15% 60%;
+    --accent: 35 100% 55%;
+    --accent-foreground: 260 30% 5%;
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 60 10% 95%;
+    --border: 260 30% 20%;
+    --input: 260 25% 15%;
+    --ring: 270 100% 65%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+    font-family: 'Inter', sans-serif;
+    background-image: var(--gradient-hero);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Star field effect */
+.stars-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background-image: 
+    radial-gradient(2px 2px at 20px 30px, hsl(60 10% 95% / 0.3), transparent),
+    radial-gradient(2px 2px at 40px 70px, hsl(270 100% 65% / 0.4), transparent),
+    radial-gradient(1px 1px at 90px 40px, hsl(60 10% 95% / 0.2), transparent),
+    radial-gradient(2px 2px at 130px 80px, hsl(200 100% 60% / 0.3), transparent),
+    radial-gradient(1px 1px at 160px 120px, hsl(60 10% 95% / 0.3), transparent);
+  background-size: 200px 200px;
+  animation: twinkle 5s ease-in-out infinite;
+  z-index: -1;
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}
+
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+  
+  .gradient-text-secondary {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-secondary);
+  }
+  
+  .gradient-border {
+    position: relative;
+    background: hsl(var(--card));
+    border-radius: var(--radius);
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: var(--gradient-primary);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+  }
+  
+  .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border border-border/50;
+    box-shadow: var(--glow-subtle);
+  }
+  
+  .glow-primary {
+    box-shadow: var(--glow-primary);
+  }
+  
+  .glow-accent {
+    box-shadow: var(--glow-accent);
+  }
+  
+  .glow-subtle {
+    box-shadow: var(--glow-subtle);
+  }
+  
+  .orbit-ring {
+    @apply absolute rounded-full border border-primary/30;
+    animation: orbit-spin 25s linear infinite;
+  }
+  
+  .orbit-ring-reverse {
+    @apply absolute rounded-full border border-accent/20;
+    animation: orbit-spin-reverse 20s linear infinite;
+  }
+  
+  @keyframes orbit-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes orbit-spin-reverse {
+    from { transform: rotate(360deg); }
+    to { transform: rotate(0deg); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+  
+  @keyframes pulse-glow {
+    0%, 100% { 
+      opacity: 0.5;
+      box-shadow: 0 0 20px hsl(270 100% 65% / 0.2);
+    }
+    50% { 
+      opacity: 1;
+      box-shadow: 0 0 40px hsl(270 100% 65% / 0.4);
+    }
+  }
+  
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 3s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    background: linear-gradient(
+      90deg,
+      hsl(var(--card)) 0%,
+      hsl(270 100% 65% / 0.1) 50%,
+      hsl(var(--card)) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+  }
+  
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  
+  .card-hover:hover {
+    @apply -translate-y-2;
+    box-shadow: var(--glow-primary);
+  }
+  
+  /* Accent badges */
+  .badge-violet {
+    @apply bg-primary/20 text-primary border border-primary/30;
+  }
+  
+  .badge-amber {
+    @apply bg-accent/20 text-accent border border-accent/30;
+  }
+  
+  .badge-cyan {
+    background: hsl(200 100% 60% / 0.2);
+    color: hsl(200 100% 60%);
+    border: 1px solid hsl(200 100% 60% / 0.3);
+  }
+  
+  .badge-green {
+    background: hsl(160 70% 50% / 0.2);
+    color: hsl(160 70% 50%);
+    border: 1px solid hsl(160 70% 50% / 0.3);
+  }
+}
